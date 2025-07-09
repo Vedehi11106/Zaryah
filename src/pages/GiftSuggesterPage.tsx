@@ -112,19 +112,19 @@ export const GiftSuggesterPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <div className="inline-flex items-center space-x-2 bg-blush-100 px-4 py-2 rounded-full mb-6">
-            <Sparkles className="w-5 h-5 text-blush-600" />
-            <span className="text-blush-700 font-semibold text-sm">Intelligent Gift Discovery</span>
+          <div className="inline-flex items-center space-x-2 bg-primary-100 px-4 py-2 rounded-full mb-6">
+            <Sparkles className="w-5 h-5 text-primary-600" />
+            <span className="text-primary-700 font-semibold text-sm">Thoughtful Gift Guidance</span>
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-charcoal-800 mb-4 font-serif">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-neutral-800 mb-4 font-serif">
             Find the Perfect{' '}
-            <span className="text-blush-600">
+            <span className="text-primary-600">
               Gift
             </span>
           </h1>
-          <p className="text-base md:text-xl text-charcoal-600 max-w-2xl mx-auto leading-relaxed font-light">
-            Our sophisticated AI helps you discover the perfect handcrafted gift based on occasion, 
-            relationship, and personal preferences.
+          <p className="text-base md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light">
+            Let our thoughtful guidance system help you discover meaningful gifts that resonate with your loved ones' 
+            hearts and celebrate your unique connection.
           </p>
         </motion.div>
 
@@ -135,25 +135,25 @@ export const GiftSuggesterPage: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-1"
                 >
-            <div className="bg-cream-50 rounded-2xl p-4 sm:p-8 shadow-subtle border border-cream-200">
+            <div className="bg-neutral-50 rounded-2xl p-4 sm:p-8 shadow-subtle border border-neutral-200">
               <div className="flex items-center space-x-4 mb-10">
-                <div className="bg-blush-600 p-3 rounded-xl">
+                <div className="bg-primary-600 p-3 rounded-xl">
                   <Search className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-charcoal-800 font-serif">Gift Preferences</h2>
+                <h2 className="text-3xl font-bold text-neutral-800 font-serif">Your Preferences</h2>
                     </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Occasion */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <Calendar className="w-5 h-5 inline mr-2" />
                     Occasion
                   </label>
                   <select
                     value={criteria.occasion}
                     onChange={(e) => setCriteria(prev => ({ ...prev, occasion: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-cream-300 focus:border-blush-400 focus:ring-2 focus:ring-blush-200 transition-all bg-cream-50 text-sm"
+                    className="w-full px-3 py-2 rounded-xl border border-neutral-300 focus:border-primary-400 focus:ring-2 focus:ring-primary-200 transition-all bg-neutral-50 text-sm"
                     required
                   >
                     <option value="">Select an occasion</option>
@@ -167,14 +167,14 @@ export const GiftSuggesterPage: React.FC = () => {
 
                 {/* Relation */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <Users className="w-5 h-5 inline mr-2" />
                     Relationship
                   </label>
                   <select
                     value={criteria.relation}
                     onChange={(e) => setCriteria(prev => ({ ...prev, relation: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-cream-300 focus:border-blush-400 focus:ring-2 focus:ring-blush-200 transition-all bg-cream-50 text-sm"
+                    className="w-full px-3 py-2 rounded-xl border border-neutral-300 focus:border-primary-400 focus:ring-2 focus:ring-primary-200 transition-all bg-neutral-50 text-sm"
                     required
                   >
                     <option value="">Select relationship</option>
@@ -188,14 +188,14 @@ export const GiftSuggesterPage: React.FC = () => {
 
                 {/* Age Group */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <Target className="w-5 h-5 inline mr-2" />
                     Age Group
                   </label>
                   <select
                     value={criteria.ageGroup}
                     onChange={(e) => setCriteria(prev => ({ ...prev, ageGroup: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-cream-300 focus:border-blush-400 focus:ring-2 focus:ring-blush-200 transition-all bg-cream-50 text-sm"
+                    className="w-full px-3 py-2 rounded-xl border border-neutral-300 focus:border-primary-400 focus:ring-2 focus:ring-primary-200 transition-all bg-neutral-50 text-sm"
                     required
                   >
                     <option value="">Select age group</option>
@@ -209,7 +209,7 @@ export const GiftSuggesterPage: React.FC = () => {
 
                 {/* Budget */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <DollarSign className="w-5 h-5 inline mr-2" />
                     Budget (₹)
                   </label>
@@ -220,25 +220,25 @@ export const GiftSuggesterPage: React.FC = () => {
                     step="100"
                     value={criteria.budget}
                     onChange={(e) => setCriteria(prev => ({ ...prev, budget: parseInt(e.target.value) }))}
-                    className="w-full h-3 bg-cream-300 rounded-lg appearance-none cursor-pointer slider"
+                    className="w-full h-3 bg-neutral-300 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="flex justify-between text-base text-charcoal-600 mt-2">
+                  <div className="flex justify-between text-base text-neutral-600 mt-2">
                     <span>₹100</span>
-                    <span className="font-semibold text-blush-600">₹{criteria.budget.toLocaleString()}</span>
+                    <span className="font-semibold text-primary-600">₹{criteria.budget.toLocaleString()}</span>
                     <span>₹10,000</span>
                   </div>
                 </div>
 
                 {/* Personality */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <Palette className="w-5 h-5 inline mr-2" />
                     Personality Type
                   </label>
                   <select
                     value={criteria.personality}
                     onChange={(e) => setCriteria(prev => ({ ...prev, personality: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-cream-300 focus:border-blush-400 focus:ring-2 focus:ring-blush-200 transition-all bg-cream-50 text-sm"
+                    className="w-full px-3 py-2 rounded-xl border border-neutral-300 focus:border-primary-400 focus:ring-2 focus:ring-primary-200 transition-all bg-neutral-50 text-sm"
                   >
                     <option value="">Select personality (optional)</option>
                     {personalities.map(personality => (
@@ -251,7 +251,7 @@ export const GiftSuggesterPage: React.FC = () => {
 
                 {/* Interests */}
                 <div>
-                  <label className="block text-base font-semibold text-charcoal-700 mb-3">
+                  <label className="block text-base font-semibold text-neutral-700 mb-3">
                     <BookOpen className="w-5 h-5 inline mr-2" />
                     Interests (Optional)
                   </label>
@@ -263,8 +263,8 @@ export const GiftSuggesterPage: React.FC = () => {
                         onClick={() => handleInterestToggle(interest)}
                         className={`px-4 py-3 rounded-lg text-base font-medium transition-all ${
                           selectedInterests.includes(interest)
-                            ? 'bg-blush-600 text-white border border-blush-600'
-                            : 'bg-cream-100 text-charcoal-700 border border-cream-300 hover:bg-cream-200'
+                            ? 'bg-primary-600 text-white border border-primary-600'
+                            : 'bg-neutral-100 text-neutral-700 border border-neutral-300 hover:bg-neutral-200'
                         }`}
                   >
                         {interest.charAt(0).toUpperCase() + interest.slice(1)}
@@ -277,17 +277,17 @@ export const GiftSuggesterPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-blush-600 hover:bg-blush-700 text-white py-5 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 text-lg"
+                  className="w-full bg-primary-600 hover:bg-primary-700 text-white py-5 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 text-lg"
                 >
                   {isLoading ? (
                     <>
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-                      <span>Discovering Perfect Gifts...</span>
+                      <span>Finding Your Perfect Match...</span>
                     </>
                   ) : (
                     <>
                       <Gift className="w-6 h-6" />
-                      <span>Discover Perfect Gifts</span>
+                      <span>Find My Perfect Gift</span>
                     </>
                   )}
                 </button>
@@ -302,48 +302,48 @@ export const GiftSuggesterPage: React.FC = () => {
             className="lg:col-span-2"
           >
             {showForm ? (
-              <div className="bg-cream-50 rounded-2xl p-16 shadow-subtle border border-cream-200 text-center">
-                <div className="bg-blush-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10">
-                  <Gift className="w-16 h-16 text-blush-600" />
+              <div className="bg-neutral-50 rounded-2xl p-16 shadow-subtle border border-neutral-200 text-center">
+                <div className="bg-primary-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10">
+                  <Gift className="w-16 h-16 text-primary-600" />
                 </div>
-                <h3 className="text-4xl font-bold text-charcoal-800 mb-8 font-serif">
-                  Ready to Discover the Perfect Gift?
+                <h3 className="text-4xl font-bold text-neutral-800 mb-8 font-serif">
+                  Ready to Find Something Special?
                 </h3>
-                <p className="text-xl text-charcoal-600 mb-10 text-lg leading-relaxed">
-                  Fill out the form to get personalized gift suggestions based on your preferences.
+                <p className="text-xl text-neutral-600 mb-10 text-lg leading-relaxed">
+                  Share your preferences and let us guide you to gifts that will create meaningful connections.
                 </p>
-                <div className="flex items-center justify-center space-x-8 text-base text-charcoal-500">
+                <div className="flex items-center justify-center space-x-8 text-base text-neutral-500">
                   <div className="flex items-center space-x-2">
-                    <Star className="w-5 h-5 text-gold-400" />
-                    <span>AI-Powered</span>
+                    <Star className="w-5 h-5 text-secondary-400" />
+                    <span>Thoughtful</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Heart className="w-5 h-5 text-blush-400" />
+                    <Heart className="w-5 h-5 text-primary-400" />
                     <span>Personalized</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Sparkles className="w-5 h-5 text-sage-400" />
-                    <span>Handcrafted</span>
+                    <Sparkles className="w-5 h-5 text-accent-400" />
+                    <span>Meaningful</span>
                   </div>
                 </div>
               </div>
             ) : (
               <div className="space-y-10">
                 {/* Results Header */}
-                <div className="bg-cream-50 rounded-2xl p-10 shadow-subtle border border-cream-200">
+                <div className="bg-neutral-50 rounded-2xl p-10 shadow-subtle border border-neutral-200">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-4xl font-bold text-charcoal-800 font-serif">
-                      Perfect Gift Suggestions
+                    <h3 className="text-4xl font-bold text-neutral-800 font-serif">
+                      Your Perfect Matches
                     </h3>
                     <button
                       onClick={handleReset}
-                      className="text-charcoal-600 hover:text-charcoal-800 font-semibold text-lg"
+                      className="text-neutral-600 hover:text-neutral-800 font-semibold text-lg"
                     >
-                      Start Over
+                      New Search
                     </button>
                   </div>
-                  <p className="text-xl text-charcoal-600">
-                    Found {suggestions.length} perfect matches for your criteria
+                  <p className="text-xl text-neutral-600">
+                    Discovered {suggestions.length} meaningful gifts that resonate with your heart
                   </p>
                 </div>
 
@@ -356,7 +356,7 @@ export const GiftSuggesterPage: React.FC = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-cream-50 rounded-2xl p-8 shadow-subtle border border-cream-200"
+                        className="bg-neutral-50 rounded-2xl p-8 shadow-subtle border border-neutral-200"
                       >
                         <div className="flex items-start space-x-6">
                           <img
@@ -365,29 +365,29 @@ export const GiftSuggesterPage: React.FC = () => {
                             className="w-24 h-24 rounded-2xl object-cover shadow-soft"
                           />
                           <div className="flex-1">
-                            <h4 className="font-bold text-charcoal-800 mb-3 font-serif text-lg">
+                            <h4 className="font-bold text-neutral-800 mb-3 font-serif text-lg">
                               {suggestion.product.name}
                             </h4>
-                            <p className="text-base text-charcoal-600 mb-6 line-clamp-2 leading-relaxed">
+                            <p className="text-base text-neutral-600 mb-6 line-clamp-2 leading-relaxed">
                               {suggestion.reason}
                             </p>
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4">
                                 <div className="flex items-center space-x-2">
-                                  <Star className="w-5 h-5 text-gold-400 fill-current" />
-                                  <span className="text-base font-semibold text-charcoal-700">
+                                  <Star className="w-5 h-5 text-secondary-400 fill-current" />
+                                  <span className="text-base font-semibold text-neutral-700">
                                     {suggestion.matchScore}%
                                   </span>
                                 </div>
-                                <span className="text-xl font-bold text-blush-600">
+                                <span className="text-xl font-bold text-primary-600">
                                   ₹{suggestion.product.price.toLocaleString()}
                                 </span>
                               </div>
                               <button
                                 onClick={() => handleAddToCart(suggestion)}
-                                className="bg-blush-600 hover:bg-blush-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm flex items-center space-x-3 text-base"
+                                className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm flex items-center space-x-3 text-base"
                               >
-                                <span>Add to Cart</span>
+                                <span>Choose This</span>
                                 <ArrowRight className="w-5 h-5" />
                               </button>
                             </div>
@@ -397,21 +397,21 @@ export const GiftSuggesterPage: React.FC = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-cream-50 rounded-2xl p-16 shadow-subtle border border-cream-200 text-center">
-                    <div className="bg-blush-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10">
-                      <Gift className="w-16 h-16 text-blush-600" />
+                  <div className="bg-neutral-50 rounded-2xl p-16 shadow-subtle border border-neutral-200 text-center">
+                    <div className="bg-primary-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10">
+                      <Gift className="w-16 h-16 text-primary-600" />
                     </div>
-                    <h3 className="text-4xl font-bold text-charcoal-800 mb-8 font-serif">
-                      No Perfect Matches Found
+                    <h3 className="text-4xl font-bold text-neutral-800 mb-8 font-serif">
+                      Let's Explore Different Paths
                     </h3>
-                    <p className="text-xl text-charcoal-600 mb-10 leading-relaxed">
-                      Try adjusting your criteria or increasing your budget to find more options.
+                    <p className="text-xl text-neutral-600 mb-10 leading-relaxed">
+                      Every journey is unique. Let's adjust your preferences to discover the perfect gift waiting for you.
                     </p>
                     <button
                       onClick={handleReset}
-                      className="bg-blush-600 hover:bg-blush-700 text-white px-10 py-5 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm text-lg"
+                      className="bg-primary-600 hover:bg-primary-700 text-white px-10 py-5 rounded-xl font-semibold transition-all shadow-soft hover:shadow-warm text-lg"
                     >
-                      Adjust Criteria
+                      Try New Path
                     </button>
                   </div>
                 )}
