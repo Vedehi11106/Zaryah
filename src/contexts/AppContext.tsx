@@ -82,8 +82,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       if (error) {
         console.error('Error fetching products:', error);
-        console.warn('Failed to load products from database, using fallback data');
-        // Use fallback sample data
+        // Check if it's a connection error or table doesn't exist
+        if (error.code === '42P01' || error.message.includes('relation') || error.message.includes('does not exist')) {
+          console.warn('Products table not found, using fallback data');
+        } else {
+          console.warn('Failed to load products from database, using fallback data');
+        }
         setProducts(getSampleProducts());
         return;
       }

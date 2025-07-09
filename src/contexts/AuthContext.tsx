@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     let mounted = true;
 
-    // Get initial session
+    // Get initial session with better error handling
     const getInitialSession = async () => {
       try {
         console.log('Getting initial session...');
@@ -47,6 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (error) {
           console.error('Error getting session:', error);
+          // Don't fail completely on session errors, just log and continue
           if (mounted) setIsLoading(false);
           return;
         }
@@ -60,6 +61,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       } catch (error) {
         console.error('Error in getInitialSession:', error);
+        // Set a fallback state instead of staying in loading forever
         if (mounted) setIsLoading(false);
       }
     };
@@ -108,59 +110,46 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                              supabaseUser.email?.split('@')[0] || 
                              'User';
           
-          const { data: newProfile, error: insertError } = await supabase
-            .from('profiles')
-            .insert({
-              id: supabaseUser.id,
-              name: defaultName,
-              role: 'buyer',
-              city: 'Mumbai',
-              is_verified: false
-            })
-            .select()
-            .single();
+          try {
+            const { data: newProfile, error: insertError } = await supabase
+              .from('profiles')
+              .insert({
+                id: supabaseUser.id,
+                name: defaultName,
+                role: 'buyer',
+                city: 'Mumbai',
+                is_verified: false
+              })
+              .select()
+              .single();
           
-          if (insertError) {
+            if (insertError) {
+              console.error('Error creating profile:', insertError);
+              throw insertError;
+            } else if (newProfile) {
+              console.log('Profile created successfully:', newProfile);
+              setUser({
+                id: newProfile.id,
+                email: supabaseUser.email || '',
+                name: newProfile.name,
+                role: newProfile.role,
+                city: newProfile.city || undefined,
+                isVerified: newProfile.is_verified,
+                businessName: newProfile.business_name || undefined,
+                description: newProfile.description || undefined
+              });
+            }
+          } catch (insertError) {
             console.error('Error creating profile:', insertError);
-            console.warn('Failed to create user profile, using fallback');
-            // Create a fallback user object
-            setUser(null);
-            setUser({
-              id: supabaseUser.id,
-              email: supabaseUser.email || '',
-              name: defaultName,
-              role: 'buyer',
-              city: 'Mumbai',
-              isVerified: false
-            });
-          } else if (newProfile) {
-            console.log('Profile created successfully:', newProfile);
-            setUser({
-              id: newProfile.id,
-              email: supabaseUser.email || '',
-              name: newProfile.name,
-              role: newProfile.role,
-              city: newProfile.city || undefined,
-              isVerified: newProfile.is_verified,
-              businessName: newProfile.business_name || undefined,
-              description: newProfile.description || undefined
-            });
+            // Create fallback user
+            this.createFallbackUser(supabaseUser, defaultName);
           }
         } else {
-          console.warn('Failed to load user profile, using fallback');
-          // Create a fallback user object
-          setUser(null);
+          // Other database errors - create fallback user
           const defaultName = supabaseUser.user_metadata?.name || 
                              supabaseUser.email?.split('@')[0] || 
                              'User';
-          setUser({
-            id: supabaseUser.id,
-            email: supabaseUser.email || '',
-            name: defaultName,
-            role: 'buyer',
-            city: 'Mumbai',
-            isVerified: false
-          });
+          this.createFallbackUser(supabaseUser, defaultName);
         }
       } else if (profile) {
         console.log('Profile loaded successfully:', profile.name);
@@ -177,27 +166,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     } catch (error) {
       console.error('Error in fetchUserProfile:', error);
-      console.warn('Failed to load user data, using fallback');
-      // Create a fallback user object
-      setUser(null);
       const defaultName = supabaseUser.user_metadata?.name || 
                          supabaseUser.email?.split('@')[0] || 
                          'User';
-      setUser({
-        id: supabaseUser.id,
-        email: supabaseUser.email || '',
-        name: defaultName,
-        role: 'buyer',
-        city: 'Mumbai',
-        isVerified: false
-      });
+      this.createFallbackUser(supabaseUser, defaultName);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    try {
+  const createFallbackUser = (supabaseUser: SupabaseUser, defaultName: string) => {
+    console.warn('Creating fallback user profile');
+    setUser({
+      id: supabaseUser.id,
+      email: supabaseUser.email || '',
+      name: defaultName,
+      role: 'buyer',
+      city: 'Mumbai',
+      isVerified: false
+    });
+  };
+
       setIsLoading(true);
       console.log('Attempting login for:', email);
       

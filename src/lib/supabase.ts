@@ -6,6 +6,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   console.error('Missing Supabase environment variables');
+  console.error('VITE_SUPABASE_URL:', supabaseUrl ? 'Present' : 'Missing');
+  console.error('VITE_SUPABASE_ANON_KEY:', supabaseAnonKey ? 'Present' : 'Missing');
   throw new Error('Missing Supabase environment variables. Please check your .env file.');
 }
 
@@ -48,7 +50,7 @@ const setAutoRetry = () => {
       console.log('🔄 Auto-retrying Supabase connection...');
       reconnect();
     }
-  }, 60000); // Retry every 60 seconds
+  }, 30000); // Retry every 30 seconds instead of 60
 };
 
 // Update connection status and set auto-retry if failed
@@ -63,6 +65,7 @@ const testConnection = async () => {
   try {
     connectionAttempts++;
     console.log(`🔌 Testing Supabase connection (attempt ${connectionAttempts}/${maxAttempts})...`);
+    
     // Test auth connection first
     const { data: authData, error: authError } = await supabase.auth.getSession();
     if (authError) {
@@ -75,11 +78,13 @@ const testConnection = async () => {
       updateConnectionStatus('failed');
       return;
     }
+    
     // Test database connection with a simple query
     const { data, error } = await supabase
       .from('profiles')
       .select('count', { count: 'exact', head: true })
       .limit(1);
+    
     if (error) {
       console.error('❌ Supabase database error:', error);
       if (error.code === '42P01') {
@@ -95,6 +100,7 @@ const testConnection = async () => {
       updateConnectionStatus('failed');
       return;
     }
+    
     console.log('✅ Supabase connected successfully');
     updateConnectionStatus('connected');
     await testAdditionalTables();

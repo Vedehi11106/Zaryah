@@ -12,35 +12,47 @@ export const ConnectionStatus: React.FC = () => {
     const checkStatus = () => {
       const currentStatus = getConnectionStatus();
       setStatus(currentStatus);
-      setIsVisible(currentStatus === 'failed' || currentStatus === 'connecting');
+      // Show status for failed connections, hide for successful ones after a delay
+      if (currentStatus === 'failed') {
+        setIsVisible(true);
+      } else if (currentStatus === 'connected') {
+        // Show success briefly, then hide
+        setIsVisible(true);
+        setTimeout(() => setIsVisible(false), 3000);
+      } else if (currentStatus === 'connecting') {
+        setIsVisible(true);
+      }
     };
 
     // Check status immediately
     checkStatus();
 
-    // Check status every 5 seconds
-    const interval = setInterval(checkStatus, 5000);
+    // Check status every 10 seconds (less frequent)
+    const interval = setInterval(checkStatus, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
   const handleRetry = async () => {
     setIsRetrying(true);
+    setStatus('connecting');
     reconnect();
     
     // Wait a bit and check status
     setTimeout(() => {
-      setStatus(getConnectionStatus());
+      const newStatus = getConnectionStatus();
+      setStatus(newStatus);
       setIsRetrying(false);
       // Hide if connected
-      if (getConnectionStatus() === 'connected') {
+      if (newStatus === 'connected') {
         setTimeout(() => setIsVisible(false), 2000);
       }
-    }, 2000);
+    }, 3000);
   };
 
   const handleManualCheck = async () => {
     setIsRetrying(true);
+    setStatus('connecting');
     const { healthy } = await healthCheck();
     setStatus(healthy ? 'connected' : 'failed');
     setIsRetrying(false);
