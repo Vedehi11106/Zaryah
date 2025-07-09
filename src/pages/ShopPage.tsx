@@ -59,14 +59,14 @@ export const ShopPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-charcoal-900 mb-6">
-            Discover Handmade{' '}
-            <span className="text-blush-600">
+          <h1 className="text-4xl md:text-6xl font-bold text-neutral-900 mb-6">
+            Discover Meaningful{' '}
+            <span className="text-primary-600">
               Treasures
             </span>
           </h1>
-          <p className="text-xl text-charcoal-700 max-w-2xl mx-auto">
-            Browse unique products from verified artisans across India. Each piece tells a story of passion and craftsmanship.
+          <p className="text-xl text-neutral-700 max-w-2xl mx-auto">
+            Explore unique creations from passionate artisans across India. Each piece carries a story waiting to become part of yours.
           </p>
         </motion.div>
 
@@ -75,17 +75,17 @@ export const ShopPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-cream-50 rounded-3xl shadow-lg border border-cream-200 p-6 md:p-8 mb-8"
+          className="bg-neutral-50 rounded-3xl shadow-lg border border-neutral-200 p-6 md:p-8 mb-8"
         >
           {/* Search Bar */}
           <div className="relative mb-6">
-            <Search className="w-6 h-6 text-blush-500 absolute left-4 top-4" />
+            <Search className="w-6 h-6 text-primary-500 absolute left-4 top-4" />
             <input
               type="text"
-              placeholder="Search for products, makers, or categories..."
+              placeholder="Search for treasures, artisans, or stories..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 border border-cream-200 rounded-2xl focus:ring-2 focus:ring-blush-200 focus:border-transparent transition-all text-lg"
+              className="w-full pl-12 pr-4 py-4 border border-neutral-200 rounded-2xl focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all text-lg"
             />
           </div>
 
@@ -94,13 +94,13 @@ export const ShopPage: React.FC = () => {
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center space-x-2 bg-blush-100 text-blush-700 px-4 py-2 rounded-xl hover:bg-blush-200 transition-colors"
+                className="flex items-center space-x-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-xl hover:bg-primary-200 transition-colors"
               >
-                <SlidersHorizontal className="w-4 h-4 text-blush-600" />
+                <SlidersHorizontal className="w-4 h-4 text-primary-600" />
                 <span>Filters</span>
               </button>
               
-              <div className="text-sm text-charcoal-700 bg-blush-50 px-3 py-1 rounded-full border border-blush-200">
+              <div className="text-sm text-neutral-700 bg-primary-50 px-3 py-1 rounded-full border border-primary-200">
                 {filteredProducts.length} of {approvedProducts.length} products
               </div>
             </div>
@@ -110,7 +110,7 @@ export const ShopPage: React.FC = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="border border-cream-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blush-200 focus:border-transparent"
+                className="border border-neutral-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-primary-200 focus:border-transparent"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -119,11 +119,11 @@ export const ShopPage: React.FC = () => {
               </select>
 
               {/* View Mode Toggle */}
-              <div className="flex bg-blush-100 rounded-xl p-1">
+              <div className="flex bg-primary-100 rounded-xl p-1">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-lg transition-colors ${
-                    viewMode === 'grid' ? 'bg-cream-50 shadow-sm' : 'text-blush-600'
+                    viewMode === 'grid' ? 'bg-neutral-50 shadow-sm' : 'text-primary-600'
                   }`}
                 >
                   <Grid className="w-4 h-4" />
@@ -131,7 +131,7 @@ export const ShopPage: React.FC = () => {
                 <button
                   onClick={() => setViewMode('list')}
                   className={`p-2 rounded-lg transition-colors ${
-                    viewMode === 'list' ? 'bg-cream-50 shadow-sm' : 'text-blush-600'
+                    viewMode === 'list' ? 'bg-neutral-50 shadow-sm' : 'text-primary-600'
                   }`}
                 >
                   <List className="w-4 h-4" />
@@ -146,19 +146,19 @@ export const ShopPage: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-blush-200 pt-6"
+              className="border-t border-primary-200 pt-6"
             >
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {/* City Filter */}
                 <div>
-                  <label className="block text-sm font-semibold text-charcoal-800 mb-3">
+                  <label className="block text-sm font-semibold text-neutral-800 mb-3">
                     <MapPin className="w-4 h-4 inline mr-2" />
                     City
                   </label>
                   <select
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.target.value)}
-                    className="w-full border border-blush-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blush-200 focus:border-transparent"
+                    className="w-full border border-primary-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary-200 focus:border-transparent"
                   >
                     {cities.map(city => (
                       <option key={city} value={city}>
@@ -170,13 +170,13 @@ export const ShopPage: React.FC = () => {
 
                 {/* Category Filter */}
                 <div>
-                  <label className="block text-sm font-semibold text-charcoal-800 mb-3">
+                  <label className="block text-sm font-semibold text-neutral-800 mb-3">
                     Category
                   </label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full border border-blush-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blush-200 focus:border-transparent"
+                    className="w-full border border-primary-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary-200 focus:border-transparent"
                   >
                     {categories.map(category => (
                       <option key={category} value={category}>
@@ -188,18 +188,18 @@ export const ShopPage: React.FC = () => {
 
                 {/* Instant Delivery Filter */}
                 <div>
-                  <label className="block text-sm font-semibold text-charcoal-800 mb-3">
+                  <label className="block text-sm font-semibold text-neutral-800 mb-3">
                     <Truck className="w-4 h-4 inline mr-2" />
                     Delivery
                   </label>
-                  <label className="flex items-center space-x-3 cursor-pointer bg-blush-50 p-3 rounded-xl hover:bg-blush-100 transition-colors border border-blush-200">
+                  <label className="flex items-center space-x-3 cursor-pointer bg-primary-50 p-3 rounded-xl hover:bg-primary-100 transition-colors border border-primary-200">
                     <input
                       type="checkbox"
                       checked={showInstantDelivery}
                       onChange={(e) => setShowInstantDelivery(e.target.checked)}
-                      className="rounded border-blush-300 text-blush-600 focus:ring-blush-500"
+                      className="rounded border-primary-300 text-primary-600 focus:ring-primary-500"
                     />
-                    <span>Instant Delivery</span>
+                    <span>Express Delivery</span>
                   </label>
                 </div>
 
@@ -212,7 +212,7 @@ export const ShopPage: React.FC = () => {
                       setSelectedCategory('all');
                       setShowInstantDelivery(false);
                     }}
-                    className="flex items-center space-x-2 text-blush-600 hover:text-blush-800 transition-colors bg-blush-50 px-4 py-3 rounded-xl hover:bg-blush-100 w-full justify-center border border-blush-200"
+                    className="flex items-center space-x-2 text-primary-600 hover:text-primary-800 transition-colors bg-primary-50 px-4 py-3 rounded-xl hover:bg-primary-100 w-full justify-center border border-primary-200"
                   >
                     <X className="w-4 h-4" />
                     <span className="font-medium">Clear All</span>
