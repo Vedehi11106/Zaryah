@@ -142,14 +142,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           } catch (insertError) {
             console.error('Error creating profile:', insertError);
             // Create fallback user
-            this.createFallbackUser(supabaseUser, defaultName);
+            createFallbackUser(supabaseUser, defaultName);
           }
         } else {
           // Other database errors - create fallback user
           const defaultName = supabaseUser.user_metadata?.name || 
                              supabaseUser.email?.split('@')[0] || 
                              'User';
-          this.createFallbackUser(supabaseUser, defaultName);
+          createFallbackUser(supabaseUser, defaultName);
         }
       } else if (profile) {
         console.log('Profile loaded successfully:', profile.name);
@@ -169,7 +169,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const defaultName = supabaseUser.user_metadata?.name || 
                          supabaseUser.email?.split('@')[0] || 
                          'User';
-      this.createFallbackUser(supabaseUser, defaultName);
+      createFallbackUser(supabaseUser, defaultName);
     } finally {
       setIsLoading(false);
     }
@@ -187,6 +187,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
       setIsLoading(true);
       console.log('Attempting login for:', email);
       
